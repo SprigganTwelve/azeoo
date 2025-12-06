@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.white,
         body: ProfilePage(
-          updateUserCallback: (setUserId) => setUserId(42),
+          updateUserCallback: (setUserId) => setUserId(2),
         ),
       ),
     );

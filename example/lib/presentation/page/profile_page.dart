@@ -58,7 +58,7 @@ class _ProfileFrameState extends ConsumerState<ProfileFrame> {
       builder: (context, snapshot) {
 
         if(snapshot.error != null){
-          return const Center(child: Text("Something went wrong"));
+          return const Center(child: Text("Something went wrong", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),));
         }
 
         if (!snapshot.hasData) {
@@ -67,25 +67,30 @@ class _ProfileFrameState extends ConsumerState<ProfileFrame> {
 
         final user = snapshot.data!;
 
-        return Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Image.network(
-                user.imageUrl,
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
+        return Container(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 170,),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(150),
+                child: Image.network(
+                  user.imageUrl,
+                  width: 120,
+                  height: 120,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            Text(
-              user.getFullName(),
-              style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500
+              Text(
+                user.getFullName(),
+                style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

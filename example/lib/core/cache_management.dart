@@ -9,19 +9,23 @@ class CacheManager{
 
   static Future<UserModel?> retreiveExistingUser(int userId) async {
     
-    final sharedPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     final userCache = sharedPreferences.getString("userCache") ?? "{}";
     final Map<String, dynamic> cachedMap = json.decode(userCache);
     final userJson = cachedMap[userId.toString()];
 
     if (userJson == null) return null;
-    return UserModel.fromJSON(Map<String, dynamic>.from(userJson));
+
+    final userMap = userJson;
+
+    return UserModel.fromJSON(userMap);
 
   }
 
+
   static Future<void> saveUserToCache(UserModel user) async {
 
-    final sharedPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     final String userCache = sharedPreferences.getString("userCache") ?? "{}";
     final Map<String, dynamic> cachedMap = jsonDecode(userCache);
 
@@ -30,12 +34,10 @@ class CacheManager{
       "first_name": user.firstName,
       "last_name": user.lastName,
       "email": user.email,
-      "age": user.age,
       "picture": [{"url": user.imageUrl}]
     };
 
     await sharedPreferences.setString("userCache", jsonEncode(cachedMap));
-
   }
 
 }
