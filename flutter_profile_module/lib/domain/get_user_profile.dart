@@ -1,8 +1,11 @@
 
 
 
-import 'package:flutter_profile_module/data/models/user_model.dart';
-import 'package:flutter_profile_module/data/repositories/user_repository.dart';
+
+
+
+import '../data/models/user_model.dart';
+import '../data/repositories/user_repository.dart';
 
 class GetUserProfileUseCase {
   final UserRepository userRepository;

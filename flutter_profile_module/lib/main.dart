@@ -3,19 +3,17 @@ import 'package:flutter_profile_module/presentation/page/profile_page.dart';
 
 void main() => runApp(const MyApp());
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: ProfileFrame(
-          updateUserCallback: (setUserId) => setUserId(42),
-        ),
-      ),
+      home: ProfileFrame(updateUserCallback: (setUser)=> setUser(1)),
     );
   }
 }
+
