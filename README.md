@@ -63,6 +63,7 @@ sur un émulateur Android depuis Android Studio :
 
 - Pour lancer l'application sur iOS :
       npx react-native run-ios
+
 ```
 
         
