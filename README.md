@@ -56,7 +56,7 @@ sur un émulateur Android depuis Android Studio :
 
 - Toujours dans le dossier azeoo/flutter_profile_module exécutez :
       flutter build aar
-  Cette commande consruit le module a utilisé dans l'application React à partir du code Flutter
+  Cette commande consruit le module à utilisé dans l'application React à partir du code Flutter
                                           
 - Rendez-vous dans le dossier azeoo/frontend et exécutez :
       npm install
