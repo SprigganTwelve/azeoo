@@ -18,10 +18,10 @@ L'application React Native doit être capable d'afficher deux onglets différent
 - **@react-navigation/bottom-tabs** : permet de créer les composants dans une TabBar responsable de leur navigation
 
 ### Packages principaux (Flutter)
-- **http: ^1.6.0**                  : est une solution simple et optimisé pour réaliser des appel api à l'intérieur d'un projet flutter.
-- **go_router: ^17.0.0**            : établir un sytème de router propre au module
-- **flutter_riverpod: ^3.0.3**      : gestion des états interne dans flutter
-- **shared_preferences: ^2.5.3**    : gestion du cache flutter
+- **http**                  : est une solution simple et optimisé pour réaliser des appel api à l'intérieur d'un projet flutter.
+- **go_router**            : établir un sytème de router propre au module
+- **flutter_riverpod:**      : gestion des états interne dans flutter
+- **shared_preferences:**    : gestion du cache flutter
 
 ```            
 Nous avons décidé d'utiliser ces packages plutôt que d'autres solutions alternatives car ils sont plus simples et concis.

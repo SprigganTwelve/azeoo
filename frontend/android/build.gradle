@@ -5,7 +5,7 @@ def flutterModuleDir = rootDir.toPath().resolve("../../flutter_profile_module/bu
 allprojects {
     repositories {
         maven {
-            url 'C:/Dali/About_Me/professionnal/azeoo/flutter_profile_module/build/host/outputs/repo'
+            url flutterModuleDir
         }
         maven {
             url "$storageUrl/download.flutter.io"

@@ -6,7 +6,6 @@ import 'dart:convert';
 
 import 'package:flutter_app/core/errors/models/user_model_errors.dart';
 
-
 class UserModel{
   final int id;
   final String email;

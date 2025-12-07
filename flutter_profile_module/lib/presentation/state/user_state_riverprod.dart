@@ -8,7 +8,6 @@ import 'package:flutter_profile_module/data/models/user_model.dart';
 import 'package:flutter_profile_module/data/repositories/user_repository.dart';
 import 'package:flutter_profile_module/domain/get_user_profile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 final trackedUserId = StateProvider<int>((_) => 14);
 
