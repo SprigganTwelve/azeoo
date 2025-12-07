@@ -1,6 +1,6 @@
 
-import 'package:example/core/errors/api_errors.dart';
-import 'package:example/data/models/user_model.dart';
+import 'package:flutter_app/core/errors/api_errors.dart';
+import 'package:flutter_app/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class FetchUserDataApi {

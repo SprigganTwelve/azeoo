@@ -4,7 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:example/core/errors/models/user_model_errors.dart';
+import 'package:flutter_app/core/errors/models/user_model_errors.dart';
+
 
 class UserModel{
   final int id;

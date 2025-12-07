@@ -5,9 +5,10 @@
 
 
 
-import 'package:example/data/models/user_model.dart';
-import 'package:example/data/repositories/user_repository.dart';
-import 'package:example/domain/get_user_profile.dart';
+
+import 'package:flutter_app/data/models/user_model.dart';
+import 'package:flutter_app/data/repositories/user_repository.dart';
+import 'package:flutter_app/domain/get_user_profile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 

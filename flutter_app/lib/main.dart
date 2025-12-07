@@ -1,7 +1,7 @@
 
-import 'package:example/presentation/page/profile_page.dart';
-import 'package:example/presentation/state/user_state_riverprod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/presentation/page/profile_page.dart';
+import 'package:flutter_app/presentation/state/user_state_riverprod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
