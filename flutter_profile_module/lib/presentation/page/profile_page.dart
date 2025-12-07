@@ -1,34 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_profile_module/core/native_channel.dart';
 import '../state/user_state_riverprod.dart';
 import '../../data/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 
-class ProfileFrame extends ConsumerWidget {
+class ProfileFrame extends ConsumerStatefulWidget {
   const ProfileFrame({super.key});
+  @override
+  ConsumerState<ProfileFrame> createState() => _ProfileFrameState(); 
+}
+
+
+class _ProfileFrameState extends ConsumerState<ProfileFrame>{
+
+  static bool isHandlerRegistered = false;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final userId = ref.watch(trackedUserId);
-    final userAsync = ref.watch(trackedUserIdProvider(userId));
+  void initState() {
+    super.initState();
 
-    return userAsync.when(
-      data: (user) => _buildProfile(user),
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (err, stack) {
-        print("ERROR STATE: $err");
-        return Center(
-          child: Text(
-            "Something went wrong",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-        );
-      }
-    );
+    if (!isHandlerRegistered) {
+      isHandlerRegistered = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        channelFlutterProfile.setMethodCallHandler((call) async {
+          if (call.method == "setUserId") {
+            final userId = call.arguments as int;
+            // desactivate the default cache on provider
+            ref.invalidate(trackedUserIdProvider(userId));
+            ref.read(trackedUserId.notifier).state = userId; // updatie id
+          }
+        });
+      });
+    }
   }
 
-  Widget _buildProfile(UserModel user) {
+
+  @override
+  Widget build(BuildContext context){
+    final currentUserId = ref.watch(trackedUserId);
+    final profile = ref.watch(trackedUserIdProvider(currentUserId));
+
+    return profile.when(
+      data: (user)=> ProfilePage(user: user),
+      loading: () => CircularProgressIndicator(),
+      error: (err, _) => Text(err.toString())
+    );
+  } 
+}
+
+
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({
+    super.key,
+    required this.user,
+  });
+
+  final UserModel user;
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: Column(

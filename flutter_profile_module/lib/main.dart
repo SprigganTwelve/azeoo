@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_profile_module/presentation/state/user_state_riverprod.dart';
 import 'package:go_router/go_router.dart'; 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_profile_module/presentation/page/profile_page.dart';
@@ -8,25 +6,11 @@ import 'package:flutter_profile_module/presentation/page/profile_page.dart';
 
 
 
-final container = ProviderContainer();
-const _channel = MethodChannel("flutter_profile_channel");
-
-
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  _channel.setMethodCallHandler((call) async {
-    if (call.method == "setUserId") {
-      final int newUserId = call.arguments;
-      container.read(trackedUserId.notifier).state = newUserId;
-    }
-  });
-
   runApp(
-    UncontrolledProviderScope(
-      container: container,
-      child: const MyApp(),
+    ProviderScope(
+      child: MyApp(),
     ),
   );
 }
