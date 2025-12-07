@@ -5,30 +5,62 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 
-class ProfileFrame extends ConsumerWidget {
+class ProfileFrame extends ConsumerStatefulWidget {
   const ProfileFrame({super.key});
+  static void Function(int id)? updateUserId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final userId = ref.watch(trackedUserId);
-    final userAsync = ref.watch(trackedUserIdProvider(userId));
+  ConsumerState<ProfileFrame> createState() => _ProfileFrameState(); 
+}
 
-    return userAsync.when(
-      data: (user) => _buildProfile(user),
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (err, stack) {
-        print("ERROR STATE: $err");
-        return Center(
-          child: Text(
-            "Something went wrong",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-        );
-      }
-    );
+
+
+class _ProfileFrameState extends ConsumerState<ProfileFrame>{
+
+  static bool isHandlerRegistered = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (!isHandlerRegistered) {
+      isHandlerRegistered = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ProfileFrame.updateUserId = (id){
+            // desactivate the default cache on provider
+            ref.invalidate(trackedUserIdProvider(id));
+            ref.read(trackedUserId.notifier).state = id; // updatie id
+        };
+      });
+    }
   }
 
-  Widget _buildProfile(UserModel user) {
+
+  @override
+  Widget build(BuildContext context){
+    final currentUserId = ref.watch(trackedUserId);
+    final profile = ref.watch(trackedUserIdProvider(currentUserId));
+
+    return profile.when(
+      data: (user)=> ProfilePage(user: user),
+      loading: () => CircularProgressIndicator(),
+      error: (err, _) => Text(err.toString())
+    );
+  } 
+}
+
+
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({
+    super.key,
+    required this.user,
+  });
+
+  final UserModel user;
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: Column(
