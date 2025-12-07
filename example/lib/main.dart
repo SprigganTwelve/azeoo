@@ -20,19 +20,32 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
-          children: [
-            TextField(
-              controller: _textController,
-            ),
-            UncontrolledProviderScope(container: container, child: ProfileFrame()),
-            TextButton(
-              child: Text("Send id"),
-              onPressed: (){
-                container.read(trackedUserId.notifier).state = int.parse(_textController.text);
-              },
-            )
-          ],
+        body: Padding(
+          padding: EdgeInsetsGeometry.symmetric(vertical: 75, horizontal: 70),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextField(
+                controller: _textController,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  hintText: "Search an id",
+                  hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(width: 2.5, color: Colors.black54)
+                  )
+                ),
+              ),
+              TextButton(
+                child: Text("Send id"),
+                onPressed: (){
+                  container.read(trackedUserId.notifier).state = int.parse(_textController.text);
+                },
+              ),
+              UncontrolledProviderScope(container: container, child: ProfileFrame()),
+            ],
+          ),
         ),
       ),
     );

@@ -21,3 +21,15 @@ class SaveUserInToCacheException implements Exception {
   @override
   String toString() => message ?? "SaveUserInToCacheException";
 }
+
+
+class ClearCacheException implements Exception {
+  final String? message;
+  
+  ClearCacheException([this.message]);
+
+  @override
+  String toString() => message ?? "SaveUserInToCacheException";
+}
+
+

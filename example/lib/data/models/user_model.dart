@@ -57,9 +57,9 @@ class UserModel{
       if(!json.containsKey("last_name")) return false;
       if(!json.containsKey("first_name")) return false;
 
-      if(!json['id'] is! int ) return false;
-      if(!json['last_name']  is! String) return false;
-      if(!json['first_name'] is! String) return false;
+      if(json['id'] is! int ) return false;
+      if(json['last_name']  is! String) return false;
+      if(json['first_name'] is! String) return false;
       return true;
     }
     catch (e) {

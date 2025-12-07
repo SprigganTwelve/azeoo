@@ -11,7 +11,7 @@ class UserRepository {
   Future<UserModel> findUserById(int id) async{
     try{
       print("USER ID: $id");
-      // CacheManager.clearCache();
+      CacheManager.clearCache();
       final UserModel? savedUser = await CacheManager.retreiveExistingUser(id);
         
       //check if the user is not saved yet
@@ -24,7 +24,7 @@ class UserRepository {
       final user = Map<String, dynamic>.from(jsonDecode(responseData));
 
       var userModel = UserModel.fromJSON(user);
-
+      print("USER MODEL DATA : $userModel");
       await CacheManager.saveUserToCache(userModel);
       return userModel;
     }

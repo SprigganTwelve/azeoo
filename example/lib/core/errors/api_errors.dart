@@ -1,12 +1,13 @@
-//API
 
-class FetchAPIException implements Exception {
+
+
+class FetchAPIStatusException implements Exception {
   final String? message;
   
-  FetchAPIException([this.message]);
+  FetchAPIStatusException([this.message]);
 
   @override
-  String toString() => message ?? "FetchAPIException";
+  String toString() => message ?? "FetchAPIStatusException";
 }
 
 

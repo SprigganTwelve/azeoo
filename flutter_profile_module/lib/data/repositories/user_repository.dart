@@ -24,7 +24,6 @@ class UserRepository {
       final user = Map<String, dynamic>.from(jsonDecode(responseData));
 
       var userModel = UserModel.fromJSON(user);
-
       await CacheManager.saveUserToCache(userModel);
       return userModel;
     }

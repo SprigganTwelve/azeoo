@@ -2,8 +2,8 @@
 
 import 'dart:convert';
 
-import 'package:example/core/errors/cache_errors.dart';
 
+import 'package:example/core/errors/cache_errors.dart';
 import '../data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,6 +25,7 @@ class CacheManager{
       return UserModel.fromJSON(userMap);
     }
     catch(e){
+      print("CACHEMANAGER TARGET AN EXCEPTION WHILE  EXECUTING retreiveExistingUser");
       throw CheckUserInCacheException("CACHEMANAGER TARGET AN EXCEPTION WHILE  EXECUTING retreiveExistingUser");
     }
   }
@@ -47,14 +48,21 @@ class CacheManager{
       await sharedPreferences.setString("userCache", jsonEncode(cachedMap));
     }
     catch(e){
+      print("CACHEMANAGER TARGET AN EXCEPTION WHILE  EXECUTING saveUserToCache");
       throw SaveUserInToCacheException("CACHEMANAGER TARGET AN EXCEPTION WHILE  EXECUTING saveUserToCache");
     }
   }
 
 
   static Future<void> clearCache() async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.remove("userCache"); 
+    try{
+      final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      await sharedPreferences.remove("userCache"); 
+    }
+    catch(e){
+      print("CACHEMANAGER TARGET AN EXCEPTION WHILE  EXECUTING clearCache");
+      throw ClearCacheException("CACHEMANAGER TARGET AN EXCEPTION WHILE  EXECUTING clearCache");
+    }
   }
 
 }
