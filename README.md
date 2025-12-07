@@ -53,6 +53,10 @@ sur un émulateur Android depuis Android Studio :
 - Rendez-vous dans le dossier azeoo/flutter_profile_module et exécutez :
       flutter pub get
   Cette commande installe toutes les dépendances Flutter définies dans pubspec.yaml
+
+- Toujours dans le dossier azeoo/flutter_profile_module exécutez :
+      flutter build aar
+  Cette commande consruit le module a utilisé dans l'application React à partir du code Flutter
                                           
 - Rendez-vous dans le dossier azeoo/frontend et exécutez :
       npm install
