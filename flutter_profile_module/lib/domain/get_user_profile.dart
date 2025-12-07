@@ -14,7 +14,13 @@ class GetUserProfileUseCase {
 
   // get the user info by id without meddling with how it work
   Future<UserModel> fetchUserId(int id) {
-    return userRepository.findUserById(id);
+    try{
+      return userRepository.findUserById(id);
+    }
+    catch(e){
+      print("USER DOMAIN FAILED: $e");
+      rethrow;
+    }
   }
 
 }

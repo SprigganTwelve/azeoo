@@ -5,26 +5,34 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:flutter_profile_module/core/api_client.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_profile_module/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('FetchUserDataApi', () {
+    test('Should return a valid user JSON for userId=1', () async {
+      const userId = 1;
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      // Appel réel à l'API
+      final response = await FetchUserDataApi.findUserById(userId);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      // Vérification basique
+      expect(response, isNotEmpty);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      // Décodage JSON
+      final data = jsonDecode(response);
+
+      // Vérifie qu'on a bien un id correspondant
+      expect(data['id'], userId);
+
+      // Vérifie qu'on a un prénom et un nom
+      expect(data['first_name'], isNotEmpty);
+      expect(data['last_name'], isNotEmpty);
+
+      print('User fetched: ${data['first_name']} ${data['last_name']}');
+    });
   });
 }

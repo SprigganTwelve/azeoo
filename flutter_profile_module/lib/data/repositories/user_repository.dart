@@ -9,8 +9,9 @@ class UserRepository {
 
   // get a specific user from the api
   Future<UserModel> findUserById(int id) async{
-    try {
-      // print("USER ID: $id");
+    try{
+      print("USER ID: $id");
+      // CacheManager.clearCache();
       final UserModel? savedUser = await CacheManager.retreiveExistingUser(id);
         
       //check if the user is not saved yet
@@ -25,12 +26,11 @@ class UserRepository {
       var userModel = UserModel.fromJSON(user);
 
       await CacheManager.saveUserToCache(userModel);
-      return UserModel.fromJSON(user);
+      return userModel;
     }
-    catch (e) {
-      print("Something went wrong while using the user_repository: $e");
-      throw Exception("Something went wrong while getting the user: $e");
+    catch(e){
+        print("USER REPOSITORY FAILED: $e");
+        rethrow;
     }
   }
-
 }
